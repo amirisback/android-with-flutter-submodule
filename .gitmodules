@@ -1,0 +1,3 @@
+[submodule "flutter-inject-to-native"]
+	path = flutter-inject-to-native
+	url = https://github.com/amirisback/flutter-inject-to-native
