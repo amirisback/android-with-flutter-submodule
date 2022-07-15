@@ -1,16 +1,39 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral()
+
+        maven {
+            url '../flutter-inject-to-native/build/host/outputs/repo'
+        }
+        maven {
+            url 'https://storage.googleapis.com/download.flutter.io'
+        }
+
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()
         mavenCentral()
+
+        maven {
+            url '../flutter-inject-to-native/build/host/outputs/repo'
+        }
+        maven {
+            url 'https://storage.googleapis.com/download.flutter.io'
+        }
     }
 }
 
 include ':app'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(settingsDir, 'flutter-inject-to-native/.android/include_flutter.groovy'))                                                                     // new
+
+//include ':flutter-inject-to-native'
+//project(':flutter-inject-to-native').projectDir = new File('../flutter-inject-to-native')
